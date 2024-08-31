@@ -13,9 +13,17 @@ async function injectStyles() {
   const index = await fs.readFile(indexPath, 'utf8');
 
   const updatedIndex = `
-const style = document.createElement('style');
-style.textContent = ${JSON.stringify(styles)};
-document.head.appendChild(style);
+function injectStyles() {
+  if (typeof document !== 'undefined') {
+    const style = document.createElement('style');
+    style.textContent = ${JSON.stringify(styles)};
+    document.head.appendChild(style);
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('DOMContentLoaded', injectStyles);
+}
 
 ${index}
 `;
