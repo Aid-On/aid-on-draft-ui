@@ -1,6 +1,6 @@
 {
   "name": "aid-on-draft-ui",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,8 +9,8 @@
     "dist"
   ],
   "scripts": {
-    "build:tailwind": "tailwindcss -i src/styles.css -o dist/styles.css --minify",
-    "build": "npm run build:tailwind && rollup -c rollup.config.mjs",
+    "build:tailwind": "tsc && tailwindcss -i src/styles.css -o dist/styles.css --minify",
+    "build": "npm run build:tailwind && rollup -c rollup.config.mjs && node --experimental-modules scripts/injectStyles.js",
     "prepare": "npm run build"
   },
   "keywords": [],

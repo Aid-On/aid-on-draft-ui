@@ -4,7 +4,6 @@ import autoprefixer from 'autoprefixer';
 import tailwindcss from 'tailwindcss';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
-import path from 'path';
 
 export default {
   input: 'src/index.ts',
@@ -12,11 +11,6 @@ export default {
     {
       file: 'dist/index.js',
       format: 'es',
-      sourcemap: true
-    },
-    {
-      file: 'dist/index.cjs.js',
-      format: 'cjs',
       sourcemap: true
     }
   ],
@@ -36,7 +30,7 @@ export default {
     }),
     postcss({
       plugins: [tailwindcss(), autoprefixer()],
-      extract: path.resolve('dist/styles.css'),
+      extract: 'styles.css',
       minimize: true,
       modules: true,
       autoModules: true,
