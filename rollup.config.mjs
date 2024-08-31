@@ -2,6 +2,8 @@ import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import tailwindcss from 'tailwindcss';
+import resolve from '@rollup/plugin-node-resolve';
+import path from 'path';
 
 export default {
   input: 'src/index.ts',
@@ -19,6 +21,9 @@ export default {
   ],
   external: ['react', 'react-dom'],
   plugins: [
+    resolve({
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.css']
+    }),
     typescript({
       tsconfig: './tsconfig.json',
       sourceMap: true,
@@ -26,9 +31,11 @@ export default {
     }),
     postcss({
       plugins: [tailwindcss(), autoprefixer()],
-      inject: true, // これにより、CSSがJSにインライン化されます
+      inject: true,
       minimize: true,
-      extract: false // CSSを別ファイルとして抽出しない
+      extract: false,
+      extensions: ['.css'],
+      use: ['sass', 'stylus'],
     }),
   ],
 };

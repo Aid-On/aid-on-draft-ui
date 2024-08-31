@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
 
-// このインポートにより、TailwindのスタイルがJSにバンドルされます
-import './styles.css';
-
 interface AidOnDraftUIProviderProps {
   children: React.ReactNode;
 }
