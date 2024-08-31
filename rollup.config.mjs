@@ -17,7 +17,7 @@ export default {
       sourcemap: true
     }
   ],
-  external: ['react', 'react-dom', 'tslib'],
+  external: ['react', 'react-dom'],
   plugins: [
     typescript({
       tsconfig: './tsconfig.json',
@@ -25,8 +25,10 @@ export default {
       inlineSources: true
     }),
     postcss({
-      plugins: [autoprefixer(), tailwindcss()],
-      extract: 'styles.css',
+      plugins: [tailwindcss(), autoprefixer()],
+      inject: true, // これにより、CSSがJSにインライン化されます
+      minimize: true,
+      extract: false // CSSを別ファイルとして抽出しない
     }),
   ],
 };
