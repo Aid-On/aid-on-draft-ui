@@ -31,11 +31,10 @@ export default {
     }),
     postcss({
       plugins: [tailwindcss(), autoprefixer()],
-      inject: true,
+      extract: path.resolve('dist/styles.css'),
       minimize: true,
-      extract: false,
-      extensions: ['.css'],
-      use: ['sass', 'stylus'],
+      modules: true,
+      autoModules: true,
     }),
   ],
 };

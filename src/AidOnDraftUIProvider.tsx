@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect } from 'react';
+import styles from '../dist/styles.css';
 
 interface AidOnDraftUIProviderProps {
   children: React.ReactNode;
@@ -7,29 +8,13 @@ interface AidOnDraftUIProviderProps {
 
 export const AidOnDraftUIProvider: React.FC<AidOnDraftUIProviderProps> = ({ children }) => {
   useEffect(() => {
-    // Tailwind CSS CDNスクリプトを追加
-    const script = document.createElement('script');
-    script.src = 'https://cdn.tailwindcss.com';
-    script.async = true;
-    document.head.appendChild(script);
-
-    // カスタム設定を適用
-    const configScript = document.createElement('script');
-    configScript.textContent = `
-      tailwind.config = {
-        theme: {
-          extend: {
-            // ここにカスタムテーマの設定を追加
-          }
-        }
-      }
-    `;
-    document.head.appendChild(configScript);
+    // ビルドされたCSSを動的に追加
+    const style = document.createElement('style');
+    style.textContent = styles;
+    document.head.appendChild(style);
 
     return () => {
-      // クリーンアップ: スクリプトを削除
-      document.head.removeChild(script);
-      document.head.removeChild(configScript);
+      document.head.removeChild(style);
     };
   }, []);
 
