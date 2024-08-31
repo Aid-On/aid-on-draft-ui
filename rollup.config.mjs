@@ -3,6 +3,7 @@ import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import tailwindcss from 'tailwindcss';
 import resolve from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
 import path from 'path';
 
 export default {
@@ -21,6 +22,10 @@ export default {
   ],
   external: ['react', 'react-dom'],
   plugins: [
+    replace({
+      'use client': '',
+      preventAssignment: true
+    }),
     resolve({
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.css']
     }),
