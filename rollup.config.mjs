@@ -8,16 +8,22 @@ export default {
   output: [
     {
       file: 'dist/index.js',
-      format: 'cjs',
+      format: 'es',
+      sourcemap: true
     },
     {
-      file: 'dist/index.esm.js',
-      format: 'esm',
-    },
+      file: 'dist/index.cjs.js',
+      format: 'cjs',
+      sourcemap: true
+    }
   ],
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', 'tslib'],
   plugins: [
-    typescript(),
+    typescript({
+      tsconfig: './tsconfig.json',
+      sourceMap: true,
+      inlineSources: true
+    }),
     postcss({
       plugins: [autoprefixer(), tailwindcss()],
       extract: 'styles.css',
