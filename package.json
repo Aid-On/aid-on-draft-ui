@@ -40,5 +40,8 @@
   "sideEffects": false,
   "nextjs": {
     "clientOnly": true
+  },
+  "overrides": {
+    "postcss-selector-parser@6.1.4": "^7.1.6"
   }
 }
